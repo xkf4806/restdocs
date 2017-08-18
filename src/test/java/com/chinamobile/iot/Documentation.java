@@ -1,6 +1,7 @@
 package com.chinamobile.iot;
 
 import com.alibaba.fastjson.JSON;
+import com.chinamobile.iot.model.City;
 import com.chinamobile.iot.model.Student;
 import io.github.robwin.markup.builder.MarkupLanguage;
 import io.github.robwin.swagger2markup.GroupBy;
@@ -69,9 +70,9 @@ public class Documentation {
 
         Student student = new Student();
         student.setName("szl");
-        student.setAge(23);
-        student.setAddress("湖北麻城");
-        student.setCls("二年级");
+        student.setAge(28);
+        student.setAddress("北京市东城区雍和宫");
+        student.setCls("大学");
         student.setSex("男");
 
         mockMvc.perform(post("/student").contentType(MediaType.APPLICATION_JSON)
@@ -79,6 +80,20 @@ public class Documentation {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andDo(MockMvcRestDocumentation.document("addStudent", preprocessResponse(prettyPrint())));
+
+        mockMvc.perform(get("/getCity").param("cityName","石家庄")
+        .accept(MediaType.APPLICATION_JSON))
+        .andExpect(status().isOk())
+        .andDo(MockMvcRestDocumentation.document("getCity", preprocessResponse(prettyPrint())));
+
+        City city = new City();
+        city.setCityName("张家口");
+        city.setProvince("河北");
+        mockMvc.perform(post("/addCity").contentType(MediaType.APPLICATION_JSON)
+        .content(JSON.toJSONString(city))
+        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful())
+                .andDo(MockMvcRestDocumentation.document("addCity", preprocessResponse(prettyPrint())));
     }
 
 
