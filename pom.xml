@@ -53,6 +53,10 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -79,6 +83,7 @@
                 <configuration>
                     <sourceDirectory>${project.basedir}/docs/asciidoc</sourceDirectory>
                     <sourceDocumentName>index.adoc</sourceDocumentName>
+                    <outputDirectory>${project.basedir}/docs/html</outputDirectory>
                     <attributes>
                         <doctype>book</doctype>
                         <toc>left</toc>
@@ -108,8 +113,5 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 
 </project>
